@@ -112,13 +112,13 @@ def preprocess_obs(
         for key, _obs in obs.items():
             preprocessed_obs[key] = preprocess_obs(_obs, observation_space[key], normalize_images=normalize_images)
         return preprocessed_obs  # type: ignore[return-value]
-#has changed here
-    assert isinstance(obs, th.Tensor), f"Expecting a torch Tensor, but got {type(obs)}"
+    #NOTE: we changed here
+    # assert isinstance(obs, th.Tensor), f"Expecting a torch Tensor, but got {type(obs)}"
 
     if isinstance(observation_space, spaces.Box):
         if normalize_images and is_image_space(observation_space):
             return obs.float() / 255.0
-        return obs.float()
+        return [ob.float() for ob in obs]
 
     elif isinstance(observation_space, spaces.Discrete):
         # One hot encoding and convert to float to avoid errors

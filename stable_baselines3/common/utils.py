@@ -260,16 +260,18 @@ def is_vectorized_box_observation(observation: np.ndarray, observation_space: sp
     :param observation_space: the observation space
     :return: whether the given observation is vectorized or not
     """
+    #NOTE: we changed here
     if observation.shape == observation_space.shape:
         return False
     elif observation.shape[1:] == observation_space.shape:
         return True
     else:
-        raise ValueError(
-            f"Error: Unexpected observation shape {observation.shape} for "
-            + f"Box environment, please use {observation_space.shape} "
-            + "or (n_env, {}) for the observation shape.".format(", ".join(map(str, observation_space.shape)))
-        )
+        return True
+        # raise ValueError(
+        #     f"Error: Unexpected observation shape {observation.shape} for "
+        #     + f"Box environment, please use {observation_space.shape} "
+        #     + "or (n_env, {}) for the observation shape.".format(", ".join(map(str, observation_space.shape)))
+        # )
 
 
 def is_vectorized_discrete_observation(observation: Union[int, np.ndarray], observation_space: spaces.Discrete) -> bool:

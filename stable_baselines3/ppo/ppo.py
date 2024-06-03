@@ -213,7 +213,7 @@ class PPO(OnPolicyAlgorithm):
                 # Re-sample the noise matrix because the log_std has changed
                 if self.use_sde:
                     self.policy.reset_noise(self.batch_size)
-#TODO: change the policy to adapt to tensor
+
                 values, log_prob, entropy = self.policy.evaluate_actions(rollout_data.observations, actions)
                 values = values.flatten()
                 # Normalize advantage
