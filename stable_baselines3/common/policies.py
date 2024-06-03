@@ -128,7 +128,7 @@ class BaseModel(nn.Module):
         :return: The extracted features
         """
         preprocessed_obs = preprocess_obs(obs, self.observation_space, normalize_images=self.normalize_images)
-        return features_extractor(preprocessed_obs)
+        return(preprocessed_obs)
 
     def _get_constructor_parameters(self) -> Dict[str, Any]:
         """
@@ -257,6 +257,7 @@ class BaseModel(nn.Module):
                     obs_ = np.array(obs)
                 vectorized_env = vectorized_env or is_vectorized_observation(obs_, obs_space)
                 # Add batch dimension if needed
+                #this has been changed
                 observation[key] = obs_.reshape((-1, *self.observation_space[key].shape))  # type: ignore[misc]
 
         elif is_image_space(self.observation_space):
